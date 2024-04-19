@@ -158,6 +158,8 @@ class Game(Frame):
 		r3 = Room("Room 3", "images/room3.gif")
 		r4 = Room("Room 4", "images/room4.gif",)
 		r5 = Room("Trapdoor", "images/skull.gif")
+		r6 = Room("Room 5", "images/room7.gif")
+		r7 = Room("Room", "images/room7.gif")
 
 		# add exits to rooms 1
 		r1.addExit("east", r2)
@@ -210,9 +212,29 @@ class Game(Frame):
 		# add grabbables to room 4
 		r4.addGrabbable("snake")
 
+		# add exits to room 6 (this room is south of room 4, so there's only 1 exit for now)
+		r6.addExit("north", r4)
+		r6.addExit("west")
 
+		# add items to room 6
+		r6.addItem("table", "It's a fancy looking table filled with empty plates and expensive looking utensils.")
+		r6.addItem("rug", "The rug is red and filled with random patterns")
+		r6.addItem("plate", "This looks expensive, you might be able to sell this for a lot of money..")
+
+		# add grabbables to room 6
+		r6.addGrabbable("plate")
+
+		# add exits to room 7 (only one exit because this room is directly south of room 6)
+		r7.addExit("north", r6)
+
+		# add items to room 7
+		r7.addItem("book", "There's nothing in it besides one page but it's ripped in half, it says 'WATCH OUT FOR TRA...")
+		r7.addItem("sculpture", "Sculpture of an angel, there's two others like this in the room.")
+		r7.addItem("bookshelves", "This bookshelf is filled with books and it stretches up to the ceiling of the room.")
+
+		# add grabbables to room 7
+		r7.addGrabbable("book")
 		
-
 		# set room 1 as the current room at the beginning of the game
 		Game.currentRoom = r1
 
