@@ -332,7 +332,7 @@ class Game(Frame):
 			self.text.config(state=DISABLED)
 			return	
 		else:
-			self.text.insert(END, str(Game.currentRoom) + "\nYou are carrying"+ str(self.inventory) + "\n" + status)
+			self.text.insert(END, str(Game.currentRoom) + "\nYou are carrying: "+ str(self.inventory) + "\n" + status)
 		self.text.config(state=DISABLED)
 
 	# plays the game
