@@ -235,7 +235,7 @@ class Game(Frame):
 		# add grabbables to room 7
 		r7.addGrabbable("book")
 		
-		#add items room 8
+		#add items room 8 (gonna be a trap room that insta kills the player)
   
 		#add grabbables to room 8
   
