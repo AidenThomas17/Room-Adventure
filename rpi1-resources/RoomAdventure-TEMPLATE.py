@@ -158,8 +158,8 @@ class Game(Frame):
 		r3 = Room("Room 3", "images/room3.gif")
 		r4 = Room("Room 4", "images/room4.gif",)
 		r5 = Room("Trapdoor", "images/skull.gif")
-		r6 = Room("Room 5", "images/room7.gif")
-		r7 = Room("Room", "images/room7.gif")
+		r6 = Room("Room 6", "images/room6.gif")
+		r7 = Room("Room 7", "images/room7.gif")
 
 		# add exits to rooms 1
 		r1.addExit("east", r2)
@@ -196,13 +196,13 @@ class Game(Frame):
 		r3.addItem("papers", "Written on hurredly, these texts speak of a path for the worthy serpents.", True)
 		r3.addItem("Trapdoor", "It is locked with a golden lock.", False)
 
-
 		# add grabbables to room 3
 		r3.addGrabbable("lock")
 
 		# add exits to room 4
 		r4.addExit("north", r2)
 		r4.addExit("west", r3)
+		r4.addExit("south", r6)
 
 		# add items to room 4
 		r4.addItem("bed", "It is made with gold.", True)
@@ -212,8 +212,9 @@ class Game(Frame):
 		# add grabbables to room 4
 		r4.addGrabbable("snake")
 
-		# add exits to room 6 (this room is south of room 4, so there's only 1 exit for now)
+		# add exits to room 6
 		r6.addExit("north", r4)
+		r6.addExit("east", r7)
 
 		# add items to room 6
 		r6.addItem("table", "It's a fancy looking table filled with empty plates and expensive looking utensils.", True)
@@ -223,8 +224,8 @@ class Game(Frame):
 		# add grabbables to room 6
 		r6.addGrabbable("plate")
 
-		# add exits to room 7 (only one exit because this room is directly south of room 6)
-		r7.addExit("north", r6)
+		# add exits to room 7 (only one exit because this room is directly east of room 6)
+		r7.addExit("west", r6)
 
 		# add items to room 7
 		r7.addItem("book", "There's nothing in it besides one page but it's ripped in half, it says 'WATCH OUT FOR TRA...", False)
