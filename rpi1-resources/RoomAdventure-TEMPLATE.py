@@ -180,7 +180,7 @@ class Game(Frame):
 		# add items to room 2
 		r2.addItem("rug", "It is woven and quite large.", False)
 		r2.addItem("fireplace", "It is made of marble.", False)
-		r2.addItem("bookshelf", "The shelves are filled with dusty books.", True)
+		r2.addItem("bookshelf", "The shelves are filled with dusty books, one reads 'find the holy snake...' ", True)
 
 		# add grabbables to room 2
 		r2.addGrabbable("book-lever")
@@ -234,6 +234,13 @@ class Game(Frame):
 
 		# add grabbables to room 7
 		r7.addGrabbable("book")
+		
+		#add items room 8
+  
+		#add grabbables to room 8
+  
+		#add exits to room 8
+  
 		
 		# set room 1 as the current room at the beginning of the game
 		Game.currentRoom = r1
