@@ -1,5 +1,5 @@
 ###########################################################################################
-# Name: Aiden Thomas and Deion Davis
+# Name: Aiden Thomas, Deion Davis and Kelin Formes
 # Date:  4/19/2024
 # Description: This program is a text-based adventure game that allows the player to move through 5 rooms.(make sure you find that snake)
 ###########################################################################################
