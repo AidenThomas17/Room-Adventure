@@ -193,7 +193,7 @@ class Game(Frame):
 
 		# add items to room 3
 		r3.addItem("desk", "It is made of oak.", True)
-		r3.addItem("lamp", "It is brass and has no shade.", True)
+		r3.addItem("papers", "Written on hurredly, these texts speak of a path for the worthy serpents.", True)
 		r3.addItem("Trapdoor", "It is locked with a golden lock.", False)
 
 
