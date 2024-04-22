@@ -1,7 +1,7 @@
 ###########################################################################################
 # Name: Aiden Thomas, Deion Davis and Kelin Formes
-# Date:  4/19/2024
-# Description: This program is a text-based adventure game that allows the player to move through 5 rooms.(make sure you find that snake)
+# Date: 4/22/2024
+# Description: This program is a text-based adventure game that allows the player to move through 6 rooms (make sure you find that snake).
 ###########################################################################################
 from tkinter import *
 
@@ -21,10 +21,8 @@ class Room:
 		self.unlocked = unlocked
 		self.itemGrabPairs = {
 			"key": "table",
-			"book-lever": "bookshelf",
-			"lock": "desk",
+			"papers": "desk",
 			"snake": "painting"
-
 		}
 		self.itemLocks = {}
 
@@ -166,21 +164,23 @@ class Game(Frame):
 		r1.addExit("south", r3)
 
 		# add items to room 1
-		r1.addItem("table", "It is made of oak. A golden key rests on it.", True)
-		r1.addItem("chair", "It is made of wicker.", True)
-		r1.addItem("fireplace", "It is made of brick.", False)
-
+		r1.addItem("fireplace", "It is made of marble.", False)
+		r1.addItem("bookcase", "The shelves are filled with dusty books and one reads: 'Find the holy snake...' ", True)
+		r1.addItem("book", "There's nothing in it besides one page but it's ripped in half, it says 'WATCH OUT FOR TRA...", False)
+		
 		# add grabbables to room 1
-		r1.addGrabbable("key")
+		r1.addGrabbable("book")
 
 		# add exits to room 2
 		r2.addExit("west", r1)
 		r2.addExit("south", r4)
 
 		# add items to room 2
-		r2.addItem("rug", "It is woven and quite large.", False)
-		r2.addItem("fireplace", "It is made of marble.", False)
-		r2.addItem("bookshelf", "The shelves are filled with dusty books, one reads 'find the holy snake...' ", True)
+		r2.addItem("table", "It is woven and quite large.", True)
+		r2.addItem("sculpture", "Sculpture of an angel holding a snake", True)
+		r2.addItem("candle", "A marble candle that is still lit with a black flame.", True)
+
+		r2.addGrabbable("snake")
 
 		# add grabbables to room 2
 		r2.addGrabbable("book-lever")
@@ -190,14 +190,13 @@ class Game(Frame):
 		r3.addExit("east", r4)
 		r3.addExit("down", r5)  # add exit for trapdoor
 
-
 		# add items to room 3
-		r3.addItem("desk", "It is made of oak.", True)
+		r3.addItem("desk", "It is made of oak with some important looking papers that speak of a Corba...", True)
 		r3.addItem("papers", "Written on hurredly, these texts speak of a path for the worthy serpents.", True)
-		r3.addItem("Trapdoor", "It is locked with a golden lock.", False)
+		r3.addItem("Trapdoor", "A mysterous trapdoor made of gold and brass. Eerie...", False)
 
 		# add grabbables to room 3
-		r3.addGrabbable("lock")
+		r3.addGrabbable("papers")
 
 		# add exits to room 4
 		r4.addExit("north", r2)
@@ -208,9 +207,6 @@ class Game(Frame):
 		r4.addItem("bed", "It is made with gold.", True)
 		r4.addItem("painting", "It depicts a giant snake", False)
 		r4.addItem("dresser", "It is made of marble.", True)
-
-		# add grabbables to room 4
-		r4.addGrabbable("snake")
 
 		# add exits to room 6
 		r6.addExit("north", r4)
@@ -224,23 +220,16 @@ class Game(Frame):
 		# add grabbables to room 6
 		r6.addGrabbable("plate")
 
-		# add exits to room 7 (only one exit because this room is directly east of room 6)
-		r7.addExit("west", r6)
-
 		# add items to room 7
-		r7.addItem("book", "There's nothing in it besides one page but it's ripped in half, it says 'WATCH OUT FOR TRA...", False)
-		r7.addItem("sculpture", "Sculpture of an angel, there's two others like this in the room.", True)
-		r7.addItem("bookshelves", "This bookshelf is filled with books and it stretches up to the ceiling of the room.", True)
+		r7.addItem("table", "It is made of oak. A golden key rests on it.", False)
+		r7.addItem("chair", "It is made of wicker.", True)
+		r7.addItem("fireplace", "It is made of brick.", True)
 
 		# add grabbables to room 7
-		r7.addGrabbable("book")
-		
-		#add items room 8 (gonna be a trap room that insta kills the player)
-  
-		#add grabbables to room 8
-  
-		#add exits to room 8
-  
+		r7.addGrabbable("key")
+
+		# add exits to room 7 (only one exit because this room is directly east of room 6)
+		r7.addExit("west", r6)
 		
 		# set room 1 as the current room at the beginning of the game
 		Game.currentRoom = r1
@@ -248,32 +237,19 @@ class Game(Frame):
 		# initialize the player's inventory
 		Game.inventory = []
 
-
 		# usable and usable pairs
 		Game.usables = {}
 		Game.usablePairs = {
 			"key": "lock",
-			"book-lever": "bookshelf",
 			"snake": "painting"
 		}
-
 
 		# item grab pairs
 		
 		Game.itemGrabPairs = {
 			"key": "table",
-			"book-lever": "bookshelf",
-			"lock": "desk",
 			"snake": "painting"
 		}
-
-		#Score
-		Game.score = 0
-
-			 
-
-		
-
 
 	# sets up the GUI
 	def setupGUI(self):
@@ -308,7 +284,6 @@ class Game(Frame):
 		text_frame.pack(side=RIGHT, fill=Y)
 		text_frame.pack_propagate(False)
 
-
 	# sets the current room image
 	def setRoomImage(self):
 		if (Game.currentRoom.name == "Trapdoor"):
@@ -323,7 +298,6 @@ class Game(Frame):
 			img = PhotoImage(file=Game.currentRoom.image)
 		self.image.config(image=img)
 		self.image.image = img
-
 
 	# sets the status displayed on the right of the GUI
 	def setStatus(self, status):
@@ -420,99 +394,34 @@ class Game(Frame):
 				response = "I don't see that item."
 				# check for valid grabbable items in the current room
 				if (noun in Game.currentRoom.grabbables):
-					# if one is found, move it to the player's inventory
-					Game.inventory.append(noun)
-					# set the response (success)
-					response = "Item grabbed."
-					# remove the item from the room
-					Game.currentRoom.delGrabbable(noun)
-				# set the status
-				self.setStatus(response)
-				return
-			# the verb is use
-			if (verb == "use"):
-				# set a default response
-				response = "I don't see that item."
-				# check for valid items in the player's inventory
-				if (noun in Game.inventory):
-					# if one is found, set the response to the item's description
-					response = Game.currentRoom.items[noun]
-				# set the status
-				self.setStatus(response)
-				return
-
-'''
-	# processes the player's input
-	def process(self, event):
-		# grab the player's input from the input at the bottom of the GUI
-		action = self.entry.get()
-		# set the user's input to lowercase to make it easier to compare the verb and noun to known values
-		action = action.lower()
-		# set a default response
-		response = "I don't understand. Try verb noun. Valid verbs are go, look, and take"
-		# exit the game if the player wants to leave (supports quit, exit, and bye)
-		if (action == "quit" or action == "exit" or action == "bye"):
-			exit(0)
-		# if the player is dead
-		if (Game.currentRoom == "Trapdoor"):
-			self.setStatus(response)
-			return
-		# split the user input into words (words are separated by spaces)
-		words = action.split()
-		# the game only understands two word inputs
-		if(len(words) == 2):
-			# isolate the verb and noun
-			verb = words[0]
-			noun = words[1]
-			# the verb is go
-			if (verb == "go"):
-				# set a default response
-				response = "Invalid exit."
-				# check for valid exits in the current room
-				if (noun in Game.currentRoom.exits):
-					if noun == "down" and Game.currentRoom == "Room 3":
-						# If the player is trying to go to the trapdoor room
-						if "key" not in Game.inventory:
-							response = "You can't enter the trapdoor room without the key in your inventory."
+					# the player has to take the papers before taking the key
+					if(noun == "key" and Game.currentRoom.name == "Room 7"):
+						if "papers" not in Game.inventory:
+							response = "You try to pick the key up, but it is scorching hot! You drop it back down right back where \
+							it was siting as you can hear whispers of demands to show proof of...your studies..."
 						else:
-                        	# Allow the player to move to the trapdoor room
-							Game.currentRoom = Game.currentRoom.exits[noun]
-							response = "Room changed."
-							if "snake" in Game.inventory:
-								response = "Congratulations! You have successfully escaped the mansion with the snake! You win!"
-					# if one is found, change the current room to the one that is associated with the specified exit
-					else:
-						Game.currentRoom = Game.currentRoom.exits[noun]
-						# set the response (success)
-						response = "Room changed."
-				# set the room image
-				self.setRoomImage()
-				# set the status
-				self.setStatus(response)
-				return
-			# the verb is look
-			if (verb == "look"):
-				# set a default response
-				response = "I don't see that item."
-				# check for valid items in the current room
-				if (noun in Game.currentRoom.items):
-					# if one is found, set the response to the item's description
-					response = Game.currentRoom.items[noun]
-				# set the status
-				self.setStatus(response)
-				return
-			# the verb is take
-			if (verb == "take"):
-				# set a default response
-				response = "I don't see that item."
-				# check for valid grabbable items in the current room
-				if (noun in Game.currentRoom.grabbables):
+							response = "You manage to pick up the key. It still feels quite warm in your hands...and ominous."
+							Game.inventory.append(noun)
+							# remove the item from the room
+							Game.currentRoom.delGrabbable(noun)
+					# the player has to take the key before taking the snake
+					elif(noun == "snake" and Game.currentRoom.name == "Room 4"):
+						if "key" not in Game.inventory:
+							response = "You attempt to grab the snake off of the painting, but it does not budge. Maybe it wants something \
+							shiny..."
+						else:
+							response = "You manage to grab the snake!"
+							# if one is found, move it to the player's inventory
+							Game.inventory.append(noun)
+							# remove the item from the room
+							Game.currentRoom.delGrabbable(noun)
 					# if one is found, move it to the player's inventory
-					Game.inventory.append(noun)
-					# set the response (success)
-					response = "Item grabbed."
-					# remove the item from the room
-					Game.currentRoom.delGrabbable(noun)
+					else:
+						Game.inventory.append(noun)
+						# set the response (success)
+						response = "Item grabbed."
+						# remove the item from the room
+						Game.currentRoom.delGrabbable(noun)
 				# set the status
 				self.setStatus(response)
 				return
@@ -528,7 +437,6 @@ class Game(Frame):
 				self.setStatus(response)
 				return
 
-'''
 ##########################################################
 # the default size of the GUI is 800x600
 WIDTH = 800
