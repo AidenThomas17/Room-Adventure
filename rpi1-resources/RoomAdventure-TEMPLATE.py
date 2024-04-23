@@ -405,7 +405,7 @@ class Game(Frame):
 							# remove the item from the room
 							Game.currentRoom.delGrabbable(noun)
 					# the player has to take the key before taking the snake
-					elif(noun == "snake" and Game.currentRoom.name == "Room 4"):
+					elif(noun == "snake" and Game.currentRoom.name == "Room 2"):
 						if "key" not in Game.inventory:
 							response = "You attempt to grab the snake off of the painting, but it does not budge. Maybe it wants something \
 							shiny..."
